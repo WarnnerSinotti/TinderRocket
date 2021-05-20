@@ -6,24 +6,24 @@
 }
 
 .main-container ul {
-list-style: none;
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 30px;
-margin-top: 50px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  margin-top: 50px;
 }
 
-.main-container ul li{
+.main-container ul li {
   display: flex;
   flex-direction: column;
 }
 
-.main-container ul li img{
+.main-container ul li img {
   border-radius: 20px 20px 0 0;
   max-width: 100%;
 }
 
-.main-container ul li footer{
+.main-container ul li footer {
   flex: 1; /*este displey acompanha o elemento dos outros elementos*/
   background: #fff;
   border: 1px solid #eee;
@@ -51,24 +51,68 @@ margin-top: 50px;
   grid-gap: 10px;
 }
 
-.main-container ul li .buttons button{
+.main-container ul li .buttons button {
   height: 50px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.05);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   background: #fff;
   cursor: pointer;
 }
 
-.main-container ul li .buttons button:hover img{
+.main-container ul li .buttons button:hover img {
   transform: translateY(-5px);
   transition: all 0.2s;
 }
 
-.main-container .empty{
+.main-container .empty {
   font-size: 32px;
   color: #999;
   font-weight: bold;
   margin-top: 300px;
   font-family: 'Courier New', Courier, monospace;
+}
 
+.match-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.match-container .avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  margin: 30px 0;
+}
+
+.match-container .bionamematch {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 400px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.match-container .idnamematch {
+  font-size: 32px;
+  color: #fff;
+}
+
+.match-container .btfecharmatch {
+  border: 0;
+  background: none;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  font-style: 50px;
+  margin-top: 30px;
+  cursor: pointer;
 }
