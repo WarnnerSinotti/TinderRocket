@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
   KeyboardAvoidingView,
@@ -8,41 +8,43 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
-} from "react-native";
+} from 'react-native';
 
 import api from '../services/api';
 
-import logo from "../assets/logo.png";
+import logo from '../assets/logo.png';
 
 export default function Login({ navigation }) {
   const [user, setUser] = useState('');
-  
-useEffect(() => {
-  AsyncStorage.getItem('user').then( user => {
-    if (user){
-      navigation.navigate('main', {user})
-    }
-  })
-}, []);
 
-  async function handleLogin(){
- const  response = await api.post('/devs', { username: user});
+  useEffect(() => {
+    AsyncStorage.getItem('user').then((user) => {
+      if (user) {
+        navigation.navigate('main', { user });
+      }
+    });
+  }, []);
 
- const { _id } = response.data;
+  async function handleLogin() {
+    try {
+      const response = await api.post('/devs', { username: user });
 
-await AsyncStorage.setItem('user', _id);
+      const { _id } = response.data;
 
-    navigation.navigate('Main', { user: _id });
+      await AsyncStorage.setItem('user', _id);
+
+      navigation.navigate('Main', { user: _id });
+    } catch (error) {}
   }
-  
-  return (
-    <KeyboardAvoidingView 
-    behavior="padding"
-    enabled={Platform.OS ==='ios'}
-    style={styles.container}>
 
-      <Image source={logo}></Image>
-      
+  return (
+    <KeyboardAvoidingView
+      behavior="padding"
+      enabled={Platform.OS === 'ios'}
+      style={styles.container}
+    >
+      <Image source={logo} />
+
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
@@ -51,7 +53,7 @@ await AsyncStorage.setItem('user', _id);
         Style={styles.input}
         value={user}
         onChangeText={setUser}
-      ></TextInput>
+      />
 
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Entrar</Text>
@@ -63,18 +65,18 @@ await AsyncStorage.setItem('user', _id);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 30,
   },
 
   input: {
     height: 46,
-    alignSelf: "stretch",
-    backgroundColor: "#FFF",
+    alignSelf: 'stretch',
+    backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 4,
     marginTop: 20,
     paddingHorizontal: 15,
@@ -82,17 +84,17 @@ const styles = StyleSheet.create({
 
   button: {
     height: 46,
-    alignSelf: "stretch",
-    backgroundColor: "#DF4723",
+    alignSelf: 'stretch',
+    backgroundColor: '#DF4723',
     borderRadius: 4,
     marginTop: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   buttonText: {
-    color: "#FFF",
-    fontWeight: "bold",
+    color: '#FFF',
+    fontWeight: 'bold',
     fontSize: 16,
   },
 });
