@@ -14,7 +14,6 @@ import logo from '../assets/logo.png';
 import like from '../assets/like.png';
 import dislike from '../assets/dislike.png';
 
-
 export default function Main({ navigation }) {
   const id = navigation.getParam('user');
   const [users, setUsers] = useState([]);
@@ -32,7 +31,7 @@ export default function Main({ navigation }) {
   }, [id]);
 
   async function handleLike() {
-    const [ user, ...rest ] = users;
+    const [user, ...rest] = users;
 
     await api.post(`/devs/${user._id}/likes`, null, {
       headers: { user: id },
@@ -41,7 +40,7 @@ export default function Main({ navigation }) {
   }
 
   async function handleDislike() {
-    const [ user, ...rest ] = users;
+    const [user, ...rest] = users;
     await api.post(`/devs/${user._id}/dislikes`, null, {
       headers: { user: match.params.id },
     });
@@ -49,7 +48,7 @@ export default function Main({ navigation }) {
     setUsers(rest);
   }
 
-  async function handleLogout(){
+  async function handleLogout() {
     await AsyncStorage.clear();
 
     navigation.navigate('Login');
@@ -58,7 +57,7 @@ export default function Main({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={handleLogout}>
-      <Image style={styles.logo} source={logo} />
+        <Image style={styles.logo} source={logo} />
       </TouchableOpacity>
       <View style={styles.cardsContainer}>
         {users.lenght === 0 ? (
@@ -69,8 +68,6 @@ export default function Main({ navigation }) {
               key={user._id}
               style={[styles.card, { zIndex: users.length - index }]}
             >
-              {' '}
-              >
               <Image style={styles.avatar} source={{ uri: user.avatar }} />
               <View style={styles.footer}>
                 <Text style={styles.name}>{user.name}</Text>
@@ -83,15 +80,15 @@ export default function Main({ navigation }) {
         )}
       </View>
 
-      { users.length > 0 && (
+      {users.length > 0 && (
         <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleLike}>
-          <Image source={like} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleDislike}>
-          <Image source={dislike} />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.button} onPress={handleLike}>
+            <Image source={like} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleDislike}>
+            <Image source={dislike} />
+          </TouchableOpacity>
+        </View>
       )}
     </SafeAreaView>
   );
